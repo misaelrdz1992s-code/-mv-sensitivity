@@ -3,44 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="theme-color" content="#090909">
 <title>MV Sensitivity AI Beta 3.1</title>
 <style>
-:root{--bg:#090909;--panel:#141414;--red:#ff2638;--text:#f4f4f4;--muted:#aaa;--line:#333}
+:root{--red:#ff2638;--bg:#090909;--panel:#151515;--line:#333;--muted:#aaa}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#211014,#090909 42%);color:var(--text);font:15px/1.45 system-ui,Arial,sans-serif}
-main{max-width:760px;margin:auto;padding:18px 13px 42px}
-header{text-align:center;padding:16px 4px 20px}
+body{margin:0;background:radial-gradient(circle at top,#281015,#090909 48%);color:#f5f5f5;font:15px/1.45 system-ui,Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:16px 13px 35px}
+header{text-align:center;padding:18px 4px}
 .logo{display:inline-block;border:1px solid var(--red);color:var(--red);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:2px}
-h1{margin:12px 0 3px;font-size:clamp(28px,7vw,40px)}
+h1{font-size:clamp(28px,7vw,40px);margin:12px 0 3px}
 h1 span{color:var(--red)}
-header p,.muted,small{color:var(--muted)}
-.panel{background:linear-gradient(145deg,#171717,#101010);border:1px solid var(--line);border-radius:15px;padding:16px;margin:12px 0}
+p{margin:8px 0;color:#bbb}
+.panel{background:linear-gradient(145deg,#191919,#101010);border:1px solid var(--line);border-radius:15px;padding:16px;margin:12px 0}
 h2{font-size:17px;margin:0 0 13px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field{min-width:0}
-.field.full{grid-column:1/-1}
+.full{grid-column:1/-1}
 label{display:block;color:#ddd;font-size:13px;margin-bottom:6px}
-input,select{width:100%;min-height:45px;border:1px solid #414141;border-radius:9px;background:#0b0b0b;color:white;padding:10px;font:inherit}
+input,select{width:100%;min-height:44px;border:1px solid #414141;border-radius:9px;background:#0b0b0b;color:white;padding:10px;font:inherit}
 button{border:0;border-radius:10px;padding:12px 14px;font:inherit;font-weight:700;cursor:pointer}
-.primary{width:100%;background:var(--red);color:#fff;margin-top:14px;min-height:48px}
-.secondary{background:#252525;border:1px solid #444;color:#fff}
+.primary{width:100%;background:var(--red);color:white;margin-top:14px;min-height:48px}
+.secondary{background:#252525;border:1px solid #444;color:white}
 .danger{background:#2a1013;border:1px solid #6c1a24;color:#ffb7bf}
-.result-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dpi-card{background:#0b0b0b;border:1px solid #55202a;border-radius:12px;padding:14px;margin:12px 0}
+.dpi-number{font-size:32px;font-weight:900;color:var(--red)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.stat{background:#0b0b0b;border:1px solid #292929;border-radius:11px;padding:10px}
+.stat label{color:#bbb;font-size:12px}
+.stat input{font-size:23px;font-weight:800;padding:5px}
 .pill{font-size:11px;color:#ffabb3;border:1px solid #6e2029;padding:4px 8px;border-radius:99px}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
-.stat{background:#0b0b0b;border:1px solid #292929;border-radius:11px;padding:12px}
-.stat .name{color:#bbb;font-size:12px}
-.stat .value input{font-size:23px;font-weight:800;padding:4px 7px}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.notice{padding:10px 12px;background:#251014;border-left:3px solid var(--red);border-radius:7px;color:#eadadd;font-size:13px;margin-top:10px}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .row button{flex:1;min-width:120px}
-.notice{padding:10px 12px;background:#251014;border-left:3px solid var(--red);border-radius:7px;color:#e9dadd;font-size:13px;margin-top:10px}
 .hidden{display:none!important}
 .history-item{border-top:1px solid #303030;padding:11px 0;font-size:13px}
 .history-item b{color:#ff6875}
 footer{text-align:center;color:#777;font-size:12px;padding:14px}
-@media(min-width:560px){.stats{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:370px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+@media(min-width:560px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:370px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
 </style>
 </head>
 <body>
@@ -48,122 +50,129 @@ footer{text-align:center;color:#777;font-size:12px;padding:14px}
 <header>
   <div class="logo">BETA 3.1 · CALIBRACIÓN GRADUAL</div>
   <h1>MV <span>SENSITIVITY</span></h1>
-  <p>Tu punto de partida. Ajustes pequeños, una cosa a la vez.</p>
+  <p>Tu perfil de Free Fire, con ajustes pequeños y controlados.</p>
 </header>
 
 <section class="panel">
-  <h2>01 · Tu celular y tu forma de jugar</h2>
-  <div class="grid">
-    <div class="field full">
-      <label for="phone">Modelo de celular</label>
-      <select id="phone">
-        <option value="oppo-reno13">OPPO Reno 13 5G</option>
-        <option value="samsung-a54">Samsung Galaxy A54</option>
-        <option value="samsung-a55">Samsung Galaxy A55</option>
-        <option value="redmi-note12">Xiaomi Redmi Note 12</option>
-        <option value="redmi-note13">Xiaomi Redmi Note 13</option>
-        <option value="poco-x5">POCO X5</option>
-        <option value="poco-x6">POCO X6 Pro</option>
-        <option value="iphone11">iPhone 11</option>
-        <option value="iphone12">iPhone 12</option>
-        <option value="iphone13">iPhone 13</option>
-        <option value="moto-edge">Motorola Edge</option>
-        <option value="moto-g">Motorola Moto G</option>
-        <option value="otro">Otro modelo</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="screen">Tamaño de pantalla</label>
-      <select id="screen">
-        <option value="compact">Compacta (hasta 6.3")</option>
-        <option value="normal" selected>Normal (6.4–6.7")</option>
-        <option value="large">Grande (6.8"+)</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="dpi">DPI actual</label>
-      <input id="dpi" type="number" inputmode="numeric" min="300" max="900" value="640">
-      <small>Introduce el DPI que usas ahora.</small>
-    </div>
-    <div class="field">
-      <label for="fingers">Dedos</label>
-      <select id="fingers">
-        <option value="2" selected>2 dedos</option>
-        <option value="3">3 dedos</option>
-        <option value="4">4 dedos</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="style">Sensibilidad deseada</label>
-      <select id="style">
-        <option value="low" selected>Baja · Más control</option>
-        <option value="medium">Media · Equilibrada</option>
-        <option value="high">Alta · Más rápida</option>
-      </select>
-    </div>
+<h2>01 · Tu celular y tu estilo</h2>
+<div class="grid">
+  <div class="field full">
+    <label for="phone">Modelo de celular</label>
+    <select id="phone">
+      <option value="oppo-reno13">OPPO Reno 13 5G</option>
+      <option value="samsung-a54">Samsung Galaxy A54</option>
+      <option value="samsung-a55">Samsung Galaxy A55</option>
+      <option value="redmi-note12">Xiaomi Redmi Note 12</option>
+      <option value="redmi-note13">Xiaomi Redmi Note 13</option>
+      <option value="poco-x5">POCO X5</option>
+      <option value="poco-x6">POCO X6 Pro</option>
+      <option value="iphone11">iPhone 11</option>
+      <option value="iphone12">iPhone 12</option>
+      <option value="iphone13">iPhone 13</option>
+      <option value="moto-edge">Motorola Edge</option>
+      <option value="moto-g">Motorola Moto G</option>
+      <option value="otro">Otro modelo</option>
+    </select>
   </div>
-  <button class="primary" id="generate">GENERAR MI PERFIL</button>
-  <div id="dpiTip" class="notice">Elige tus datos y genera tu perfil.</div>
+  <div class="field">
+    <label for="screen">Tamaño de pantalla</label>
+    <select id="screen">
+      <option value="compact">Compacta (hasta 6.3")</option>
+      <option value="normal" selected>Normal (6.4–6.7")</option>
+      <option value="large">Grande (6.8"+)</option>
+    </select>
+  </div>
+  <div class="field">
+    <label for="fingers">Dedos para jugar</label>
+    <select id="fingers">
+      <option value="2" selected>2 dedos</option>
+      <option value="3">3 dedos</option>
+      <option value="4">4 dedos</option>
+    </select>
+  </div>
+  <div class="field full">
+    <label for="style">Estilo de sensibilidad</label>
+    <select id="style">
+      <option value="low" selected>Baja · Más control</option>
+      <option value="medium">Media · Equilibrada</option>
+      <option value="high">Alta · Más rápida</option>
+    </select>
+  </div>
+</div>
+
+<div class="dpi-card">
+  <div>Tu DPI recomendado</div>
+  <div class="dpi-number" id="dpiRecommended">—</div>
+  <p id="dpiExplanation">Selecciona tu celular para calcular una recomendación inicial.</p>
+</div>
+
+<button class="primary" id="generate">GENERAR MI PERFIL</button>
+<div id="formNote" class="notice">El DPI es una estimación inicial. No cambia automáticamente los ajustes de Android.</div>
 </section>
 
 <section id="results" class="panel hidden">
-  <div class="result-head">
-    <h2>02 · Mi sensibilidad general</h2>
-    <span class="pill">TODAS LAS ARMAS</span>
-  </div>
-  <p class="muted">Escala de Free Fire: 0–200. Puedes editar cada valor.</p>
-  <div class="stats" id="stats"></div>
-  <div class="notice" id="profileNote"></div>
-  <div class="row">
-    <button class="secondary" id="save">Guardar perfil</button>
-    <button class="secondary" id="record">Registrar prueba</button>
-  </div>
+<div class="result-head">
+  <h2>02 · Sensibilidad general</h2>
+  <span class="pill">TODAS LAS ARMAS</span>
+</div>
+<p>Escala de Free Fire: 0–200. Puedes editar los valores.</p>
+<div class="stats" id="stats"></div>
+<div class="dpi-card">
+  <div>Tamaño recomendado del botón de disparo</div>
+  <div class="dpi-number"><span id="buttonSize">48</span>%</div>
+</div>
+<div class="notice" id="profileNote"></div>
+<div class="row">
+  <button class="secondary" id="save">Guardar perfil</button>
+  <button class="secondary" id="record">Registrar prueba</button>
+</div>
 </section>
 
 <section id="calibration" class="panel hidden">
-  <h2>03 · Ajuste inteligente gradual</h2>
-  <p class="muted">Cambia un solo valor por intento. Prueba varias partidas antes de volver a ajustar.</p>
-  <div class="grid">
-    <div class="field full">
-      <label for="issue">¿Qué pasó con la mira?</label>
-      <select id="issue">
-        <option value="chest">Se queda en el pecho o abajo</option>
-        <option value="over">Se pasa de la cabeza</option>
-        <option value="mixed">Un rojo y luego amarillo</option>
-        <option value="good">Salieron varios rojos seguidos</option>
-      </select>
-    </div>
-    <div class="field full">
-      <label for="distance">Distancia de la prueba</label>
-      <select id="distance">
-        <option value="all">Todas las distancias</option>
-        <option value="close">Cerca</option>
-        <option value="mid">Media</option>
-        <option value="far">Lejos</option>
-      </select>
-    </div>
-  </div>
-  <button class="primary" id="adjust">APLICAR UN SOLO AJUSTE</button>
-  <div id="adjustResult" class="notice hidden" aria-live="polite"></div>
+<h2>03 · Calibración gradual</h2>
+<p>Elige lo que ocurrió en tu prueba. Solo se cambiará un valor por vez.</p>
+<div class="field">
+<label for="issue">¿Qué pasó con la mira?</label>
+<select id="issue">
+  <option value="chest">Se queda en el pecho o abajo</option>
+  <option value="over">Se pasa de la cabeza</option>
+  <option value="mixed">Un tiro rojo y luego amarillo</option>
+  <option value="good">Conseguí varios rojos seguidos</option>
+</select>
+</div>
+<div class="field" style="margin-top:12px">
+<label for="distance">Distancia de la prueba</label>
+<select id="distance">
+  <option value="all">Todas las distancias</option>
+  <option value="close">Cerca</option>
+  <option value="mid">Media</option>
+  <option value="far">Lejos</option>
+</select>
+</div>
+<button class="primary" id="adjust">APLICAR UN SOLO AJUSTE</button>
+<div id="adjustResult" class="notice hidden" aria-live="polite"></div>
 </section>
 
 <section class="panel">
-  <h2>04 · Historial de pruebas</h2>
-  <p class="muted">Se guarda en el navegador de este celular.</p>
-  <div class="row">
-    <button class="secondary" id="historyBtn">Ver historial</button>
-    <button class="danger" id="clearHistory">Borrar historial</button>
-  </div>
-  <div id="history" class="hidden"></div>
+<h2>04 · Historial de pruebas</h2>
+<p>Los datos se guardan en el navegador de este celular.</p>
+<div class="row">
+<button class="secondary" id="historyBtn">Ver historial</button>
+<button class="danger" id="clearHistory">Borrar historial</button>
+</div>
+<div id="history" class="hidden"></div>
 </section>
 
-<footer>MV Sensitivity AI · Beta 3.1 · No modifica el juego automáticamente.</footer>
+<footer>MV Sensitivity AI · Beta 3.1 · No modifica Free Fire automáticamente.</footer>
 </main>
 
 <script>
 'use strict';
+
 const $ = id => document.getElementById(id);
-const KEYS = {profile:'mv31_profile',history:'mv31_history'};
+const PROFILE_KEY = 'mv31_profile';
+const HISTORY_KEY = 'mv31_history';
+
 const names = [
   ['general','General'],
   ['red','Punto rojo'],
@@ -172,35 +181,49 @@ const names = [
   ['sniper','Francotirador'],
   ['free','Cámara libre']
 ];
+
 let current = null;
 
-function clamp(n,min=0,max=200){
-  return Math.max(min,Math.min(max,Math.round(n)));
+function clamp(value,min=0,max=200){
+  return Math.max(min,Math.min(max,Math.round(value)));
 }
 
 function readForm(){
-  const dpi = Number($('dpi').value);
-  if(!Number.isFinite(dpi)||dpi<300||dpi>900){
-    throw new Error('Introduce un DPI entre 300 y 900.');
-  }
   return {
     phone:$('phone').value,
     phoneName:$('phone').selectedOptions[0].text,
     screen:$('screen').value,
-    dpi,
     fingers:Number($('fingers').value),
     style:$('style').value
   };
 }
 
+/* Recomendación orientativa; no mide físicamente la pantalla. */
 function recommendDpi(c){
-  let base = c.screen==='compact'?520:c.screen==='large'?600:560;
-  if(c.phone.startsWith('iphone')) base=450;
-  if(c.phone==='oppo-reno13') base=c.screen==='large'?620:600;
-  if(c.phone==='poco-x6') base=600;
-  if(c.style==='low') base-=20;
-  if(c.style==='high') base+=20;
-  return clamp(base,400,700);
+  let dpi = 560;
+
+  if(c.screen === 'compact') dpi = 520;
+  if(c.screen === 'normal') dpi = 560;
+  if(c.screen === 'large') dpi = 600;
+
+  if(c.phone === 'oppo-reno13') dpi += 40;
+  if(c.phone === 'poco-x6') dpi += 20;
+  if(c.phone.startsWith('iphone')) dpi = 450;
+  if(c.phone === 'otro') dpi = 540;
+
+  if(c.style === 'low') dpi -= 20;
+  if(c.style === 'high') dpi += 20;
+
+  return clamp(dpi,400,700);
+}
+
+function recommendButton(c){
+  let size = c.fingers === 2 ? 48 : c.fingers === 3 ? 45 : 42;
+
+  if(c.screen === 'compact') size -= 1;
+  if(c.screen === 'large') size += 1;
+
+  return clamp(size,35,65);
 }
 
 function createProfile(c){
@@ -209,195 +232,197 @@ function createProfile(c){
     medium:[140,126,116,104,64,120],
     high:[154,138,128,116,72,132]
   };
-  const vals=presets[c.style].slice();
-  const diff=c.dpi-recommendDpi(c);
-  const nudge=diff>100?2:diff < -100?-2:0;
-  vals[0]=clamp(vals[0]+nudge);
-  vals[1]=clamp(vals[1]+nudge);
-  const button=clamp(
-    (c.fingers===2?48:c.fingers===3?45:42)+
-    (c.screen==='compact'?-1:c.screen==='large'?1:0),
-    35,65
-  );
+
+  const values = presets[c.style].slice();
+
   return {
     ...c,
-    values:Object.fromEntries(names.map((n,i)=>[n[0],vals[i]])),
-    button,
+    dpi:recommendDpi(c),
+    button:recommendButton(c),
+    values:Object.fromEntries(names.map((item,index)=>[
+      item[0],values[index]
+    ])),
     created:new Date().toISOString(),
     testCount:0
   };
 }
 
-function showAlert(message){
-  $('dpiTip').textContent=message;
+function showDpi(){
+  const c = readForm();
+  const dpi = recommendDpi(c);
+  $('dpiRecommended').textContent = dpi;
+  $('dpiExplanation').textContent =
+    `Estimación para ${c.phoneName}, pantalla ${c.screen} y estilo ${c.style}.`;
 }
 
-function persistProfile(){
+function saveProfile(){
   try{
-    localStorage.setItem(KEYS.profile,JSON.stringify(current));
-  }catch(e){
-    showAlert('No se pudo guardar en el navegador.');
+    localStorage.setItem(PROFILE_KEY,JSON.stringify(current));
+  }catch(error){
+    $('formNote').textContent =
+      'No se pudo guardar el perfil en este navegador.';
   }
+}
+
+function addHistory(kind,detail){
+  if(!current) return;
+
+  const list = getHistory();
+  list.unshift({
+    date:new Date().toLocaleString('es-MX'),
+    kind,detail,
+    dpi:current.dpi,
+    button:current.button,
+    values:{...current.values}
+  });
+
+  try{
+    localStorage.setItem(HISTORY_KEY,JSON.stringify(list.slice(0,20)));
+  }catch(error){}
+}
+
+function getHistory(){
+  try{
+    const data = JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');
+    return Array.isArray(data) ? data : [];
+  }catch(error){
+    return [];
+  }
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;',
+    '"':'&quot;',"'":'&#39;'
+  }[char]));
 }
 
 function render(){
   $('results').classList.remove('hidden');
   $('calibration').classList.remove('hidden');
 
-  $('stats').innerHTML=names.map(([key,label])=>`
+  $('dpiRecommended').textContent = current.dpi;
+  $('buttonSize').textContent = current.button;
+
+  $('stats').innerHTML = names.map(([key,label])=>`
     <div class="stat">
-      <div class="name">${label}</div>
-      <div class="value">
-        <input type="number" min="0" max="200" step="1"
-        inputmode="numeric" aria-label="${label}"
-        data-stat="${key}" value="${current.values[key]}">
-      </div>
+      <label for="value-${key}">${label}</label>
+      <input id="value-${key}" type="number" min="0" max="200"
+        inputmode="numeric" data-stat="${key}"
+        value="${current.values[key]}">
     </div>
   `).join('');
 
   $('stats').querySelectorAll('input').forEach(input=>{
     input.addEventListener('change',()=>{
-      const key=input.dataset.stat;
-      current.values[key]=clamp(Number(input.value));
-      input.value=current.values[key];
-      persistProfile();
+      const key = input.dataset.stat;
+      current.values[key] = clamp(Number(input.value));
+      input.value = current.values[key];
+      saveProfile();
     });
   });
 
-  $('profileNote').textContent=
-    `${current.phoneName} · DPI ${current.dpi} · ${current.fingers} dedos · Botón ${current.button}%. Perfil general para todas las armas.`;
+  $('profileNote').textContent =
+    `${current.phoneName} · DPI sugerido ${current.dpi} · `+
+    `${current.fingers} dedos · Botón ${current.button}%. `+
+    `Perfil general para todas las armas.`;
 
-  showAlert(
-    `DPI sugerido para probar: ${recommendDpi(current)}. `+
-    `No cambies tu DPI actual de golpe. Prueba primero la sensibilidad.`
-  );
+  $('formNote').textContent =
+    'DPI sugerido calculado. Para aplicarlo, tendrás que cambiarlo manualmente en Android si decides probarlo.';
 }
 
-function getHistory(){
-  try{
-    const data=JSON.parse(localStorage.getItem(KEYS.history)||'[]');
-    return Array.isArray(data)?data:[];
-  }catch(e){
-    return [];
-  }
-}
-
-function addHistory(kind,detail){
-  if(!current)return;
-  const list=getHistory();
-  list.unshift({
-    date:new Date().toLocaleString('es-MX'),
-    kind,detail,
-    values:{...current.values},
-    dpi:current.dpi,
-    button:current.button
-  });
-  try{
-    localStorage.setItem(KEYS.history,JSON.stringify(list.slice(0,20)));
-  }catch(e){}
-}
-
-function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g,c=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;',
-    '"':'&quot;',"'":'&#39;'
-  }[c]));
+function generate(){
+  current = createProfile(readForm());
+  saveProfile();
+  render();
+  addHistory('Perfil generado','Se creó un perfil nuevo.');
 }
 
 function renderHistory(){
-  const list=getHistory();
-  const el=$('history');
+  const list = getHistory();
+  const el = $('history');
   el.classList.remove('hidden');
 
   if(!list.length){
-    el.textContent='Todavía no hay pruebas guardadas.';
+    el.textContent = 'Todavía no hay pruebas guardadas.';
     return;
   }
 
-  el.innerHTML=list.map(item=>`
+  el.innerHTML = list.map(item=>`
     <div class="history-item">
       <b>${escapeHtml(item.kind)}</b> · ${escapeHtml(item.date)}<br>
       ${escapeHtml(item.detail)}<br>
-      <span class="muted">
-      DPI ${escapeHtml(item.dpi)} · Botón ${escapeHtml(item.button)}% ·
-      General ${escapeHtml(item.values.general)} ·
-      Punto rojo ${escapeHtml(item.values.red)}
+      <span>
+        DPI ${escapeHtml(item.dpi)} · Botón ${escapeHtml(item.button)}% ·
+        General ${escapeHtml(item.values.general)} ·
+        Punto rojo ${escapeHtml(item.values.red)}
       </span>
     </div>
   `).join('');
 }
 
-function generate(){
-  try{
-    const config=readForm();
-    current=createProfile(config);
-    persistProfile();
-    render();
-    addHistory('Perfil generado',`${current.phoneName}; estilo ${current.style}`);
-    $('adjustResult').classList.add('hidden');
-  }catch(error){
-    showAlert(error.message);
-  }
-}
-
 $('generate').addEventListener('click',generate);
 
 $('save').addEventListener('click',()=>{
-  if(!current)return;
-  persistProfile();
+  if(!current) return;
+  saveProfile();
   addHistory('Perfil guardado','Se guardaron los valores actuales.');
-  renderHistory();
-  showAlert('Perfil guardado en este navegador.');
+  $('formNote').textContent = 'Perfil guardado en este navegador.';
 });
 
 $('record').addEventListener('click',()=>{
-  if(!current)return;
-  current.testCount=(current.testCount||0)+1;
-  persistProfile();
+  if(!current) return;
+  current.testCount = (current.testCount||0)+1;
+  saveProfile();
   addHistory(
     'Prueba registrada',
     `Prueba #${current.testCount}; distancia: ${
       $('distance').selectedOptions[0].text
     }.`
   );
-  showAlert('Prueba registrada. Evalúa el resultado antes de ajustar.');
+  renderHistory();
+  $('formNote').textContent = 'Prueba registrada en el historial.';
 });
 
 $('adjust').addEventListener('click',()=>{
-  if(!current)return;
+  if(!current) return;
 
-  const issue=$('issue').value;
-  let key='',delta=0,message='';
+  const issue = $('issue').value;
+  let key = '';
+  let delta = 0;
+  let message = '';
 
-  if(issue==='chest'){
-    key='general';delta=2;
-    message='La mira se quedó abajo: General +2.';
-  }else if(issue==='over'){
-    key='general';delta=-2;
-    message='La mira se pasó: General -2.';
-  }else if(issue==='mixed'){
-    key='red';delta=1;
-    message='Rojo y amarillo: Punto rojo +1 solamente.';
+  if(issue === 'chest'){
+    key = 'general';
+    delta = 2;
+    message = 'La mira se queda abajo: General +2.';
+  }else if(issue === 'over'){
+    key = 'general';
+    delta = -2;
+    message = 'La mira se pasa de la cabeza: General -2.';
+  }else if(issue === 'mixed'){
+    key = 'red';
+    delta = 1;
+    message = 'Alterna rojo y amarillo: Punto rojo +1.';
   }else{
-    message='¡Bien! No cambies nada. Repite la prueba para confirmar.';
+    message = '¡Bien! No cambies nada. Repite la prueba para confirmar.';
   }
 
   if(key){
-    const before=current.values[key];
-    current.values[key]=clamp(before+delta);
-    if(current.values[key]===before){
-      message='El valor llegó al límite permitido; no se modificó.';
+    const before = current.values[key];
+    current.values[key] = clamp(before+delta);
+    if(current.values[key] === before){
+      message = 'El valor ya está en su límite. No se modificó.';
     }
-    persistProfile();
     render();
-    addHistory('Calibración',message);
-  }else{
-    addHistory('Calibración',message);
+    saveProfile();
   }
 
-  $('adjustResult').textContent=
-    message+' Prueba varias partidas antes de volver a ajustar.';
+  message += ' Prueba varias partidas antes de volver a ajustar.';
+  $('adjustResult').textContent = message;
   $('adjustResult').classList.remove('hidden');
+
+  addHistory('Calibración',message);
   renderHistory();
 });
 
@@ -410,32 +435,33 @@ $('historyBtn').addEventListener('click',()=>{
 });
 
 $('clearHistory').addEventListener('click',()=>{
-  if(!confirm('¿Borrar todas las pruebas guardadas?'))return;
-  localStorage.removeItem(KEYS.history);
-  renderHistory();
+  if(confirm('¿Borrar todo el historial de pruebas?')){
+    localStorage.removeItem(HISTORY_KEY);
+    renderHistory();
+  }
 });
 
 ['phone','screen','style'].forEach(id=>{
-  $(id).addEventListener('change',()=>{
-    try{
-      const config=readForm();
-      showAlert(`DPI sugerido estimado: ${recommendDpi(config)}. Es una referencia inicial.`);
-    }catch(e){}
-  });
+  $(id).addEventListener('change',showDpi);
 });
 
 try{
-  const saved=JSON.parse(localStorage.getItem(KEYS.profile)||'null');
-  if(saved&&saved.values&&names.every(n=>Number.isFinite(saved.values[n[0]]))){
-    current=saved;
-    $('phone').value=saved.phone||'oppo-reno13';
-    $('screen').value=saved.screen||'normal';
-    $('dpi').value=saved.dpi||640;
-    $('fingers').value=String(saved.fingers||2);
-    $('style').value=saved.style||'low';
+  const saved = JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');
+
+  if(saved && saved.values &&
+     names.every(item=>Number.isFinite(saved.values[item[0]]))){
+    current = saved;
+    $('phone').value = saved.phone || 'oppo-reno13';
+    $('screen').value = saved.screen || 'normal';
+    $('fingers').value = String(saved.fingers || 2);
+    $('style').value = saved.style || 'low';
     render();
+  }else{
+    showDpi();
   }
-}catch(e){}
+}catch(error){
+  showDpi();
+}
 </script>
 </body>
 </html>
