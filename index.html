@@ -1,0 +1,391 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="MV SENSITIVITY: generador personalizable de sensibilidad para Free Fire MAX.">
+<title>MV SENSITIVITY</title>
+<style>
+:root {
+  --red:#ff303b;
+  --bg:#090909;
+  --panel:#151515;
+  --line:#292929;
+  --muted:#aaa;
+  --white:#f7f7f7;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:system-ui,-apple-system,Arial,sans-serif;
+}
+header {
+  padding:25px 18px 18px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+  background:radial-gradient(ellipse at top,#351014 0%,#090909 70%);
+}
+.logo {
+  display:inline-grid;
+  place-items:center;
+  width:62px;height:62px;
+  border:2px solid var(--red);
+  border-radius:17px;
+  color:var(--red);
+  font-weight:1000;
+  font-size:23px;
+  transform:skew(-4deg);
+  box-shadow:0 0 25px #ff303b20;
+}
+h1 { font-size:27px; margin:12px 0 4px; letter-spacing:1px; }
+h1 span { color:var(--red); }
+header p { margin:0; color:var(--muted); font-size:12px; letter-spacing:2px; }
+main { max-width:720px; margin:auto; padding:17px 14px 45px; }
+.card {
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:17px;
+  margin-bottom:15px;
+}
+h2 { font-size:16px; margin:0 0 15px; }
+h2 b { color:var(--red); }
+label { display:block; font-size:12px; color:#ccc; margin:12px 0 7px; }
+input,select {
+  width:100%; min-height:45px;
+  border:1px solid #383838;
+  border-radius:9px;
+  background:#0b0b0b;
+  color:white;
+  padding:10px 12px;
+  font-size:15px;
+}
+input:focus,select:focus { outline:1px solid var(--red); }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+button {
+  cursor:pointer;
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  font-size:14px;
+  font-weight:750;
+}
+.primary { background:var(--red); color:white; width:100%; margin-top:17px; }
+.secondary { background:#252525; color:white; border:1px solid #393939; }
+button:active { transform:scale(.99); }
+.hint { color:var(--muted); font-size:12px; line-height:1.5; }
+.results { display:none; }
+.results.show { display:block; }
+.stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.stat {
+  background:#0b0b0b;
+  border:1px solid #303030;
+  border-radius:11px;
+  padding:13px;
+}
+.stat span { display:block; font-size:12px; color:var(--muted); }
+.stat strong { display:block; font-size:27px; margin-top:5px; }
+.stat strong small { font-size:11px; color:var(--muted); }
+.range-list { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.range {
+  border-radius:10px;
+  background:#0b0b0b;
+  padding:12px;
+  border:1px solid #2b2b2b;
+}
+.range span { display:block; color:var(--muted); font-size:12px; }
+.range strong { font-size:24px; color:var(--red); }
+.feedback { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+.feedback button { min-height:48px; }
+.notice {
+  background:#211012;
+  border:1px solid #64242a;
+  padding:12px;
+  border-radius:9px;
+  font-size:12px;
+  line-height:1.6;
+  margin-top:14px;
+}
+#message { min-height:20px; color:#ff8c92; font-size:12px; margin-top:10px; }
+footer { text-align:center; color:#777; font-size:11px; padding:10px; }
+@media(max-width:380px) {
+  .grid,.stats,.range-list { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">MV</div>
+  <h1>MV <span>SENSITIVITY</span></h1>
+  <p>FREE FIRE MAX · PERSONALIZA TU MIRA</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2><b>01 /</b> Tu perfil</h2>
+    <label for="device">Celular</label>
+    <select id="device">
+      <option value="oppo">OPPO Reno13 5G</option>
+      <option value="other">Otro celular / perfil inicial</option>
+    </select>
+
+    <div class="grid">
+      <div>
+        <label for="width">Ancho mínimo actual</label>
+        <input id="width" type="number" min="300" max="1000" value="650">
+      </div>
+      <div>
+        <label for="original">Ancho original (si lo sabes)</label>
+        <input id="original" type="number" min="200" max="600" value="311">
+      </div>
+      <div>
+        <label for="buttonSize">Botón de disparo actual (%)</label>
+        <input id="buttonSize" type="number" min="10" max="100" value="41">
+      </div>
+      <div>
+        <label for="fps">FPS</label>
+        <select id="fps">
+          <option value="high">Alto</option>
+          <option value="standard">Estándar</option>
+          <option value="unknown">No sé</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="control">¿Qué quieres mejorar principalmente?</label>
+    <select id="control">
+      <option value="balanced">Control general y consistencia</option>
+      <option value="overshoot">La mira se pasa de la cabeza</option>
+      <option value="low">La mira se queda en el pecho</option>
+    </select>
+
+    <p class="hint">Usaremos un algoritmo fijo y ajustable. No podemos medir tu levantamiento real solo con el modelo del teléfono.</p>
+    <button class="primary" id="generate">GENERAR MI SENSIBILIDAD</button>
+    <div id="message" role="status"></div>
+  </section>
+
+  <section class="card results" id="results" aria-live="polite">
+    <h2><b>02 /</b> Tu configuración</h2>
+    <div class="stats">
+      <div class="stat">
+        <span>Ancho mínimo sugerido</span>
+        <strong id="outWidth">—</strong>
+        <span>dp · punto de prueba</span>
+      </div>
+      <div class="stat">
+        <span>Botón de disparo sugerido</span>
+        <strong id="outButton">—</strong>
+        <span>porcentaje</span>
+      </div>
+    </div>
+    <p class="hint">Sensibilidad del juego (escala de 0 a 200)</p>
+    <div class="range-list" id="sensitivities"></div>
+    <div class="notice" id="explanation"></div>
+    <button class="primary" id="copy">COPIAR CONFIGURACIÓN</button>
+  </section>
+
+  <section class="card results show" id="learning">
+    <h2><b>03 /</b> Calibración con tus pruebas</h2>
+    <p class="hint">Después de probar la configuración en el campo de entrenamiento, selecciona lo que ocurrió. Cambiaremos poco a poco, no todo de golpe.</p>
+    <div class="feedback">
+      <button class="secondary" data-feedback="overshoot">⬆️ Se pasa de la cabeza</button>
+      <button class="secondary" data-feedback="low">⬇️ Se queda abajo</button>
+      <button class="secondary" data-feedback="good">🎯 Salieron rojos</button>
+      <button class="secondary" data-feedback="inconsistent">〰️ Inconsistente</button>
+    </div>
+    <p class="hint" id="learnMessage">Genera una configuración antes de registrar tu prueba.</p>
+    <button class="secondary" id="history" style="width:100%;margin-top:8px">VER HISTORIAL GUARDADO</button>
+    <div id="historyOutput" class="hint"></div>
+  </section>
+
+  <section class="card">
+    <h2><b>04 /</b> Sobre el generador</h2>
+    <p class="hint">MV SENSITIVITY es una herramienta de prueba, no un sistema oficial de Garena. Las recomendaciones son estimaciones; no garantizan disparos a la cabeza ni una configuración ideal para todos los dispositivos.</p>
+    <button class="secondary" id="reset" style="width:100%">REINICIAR CALIBRACIÓN</button>
+  </section>
+</main>
+<footer>MV SENSITIVITY · Versión inicial · Algoritmo local</footer>
+
+<script>
+(function(){
+  "use strict";
+  const $ = id => document.getElementById(id);
+  const KEY = "mv_sensitivity_v1";
+  let current = null;
+
+  function clamp(n,min,max){
+    return Math.max(min,Math.min(max,n));
+  }
+  function round(n){ return Math.round(n); }
+
+  function readHistory(){
+    try { return JSON.parse(localStorage.getItem(KEY) || "[]"); }
+    catch(e){ return []; }
+  }
+  function saveHistory(items){
+    try { localStorage.setItem(KEY,JSON.stringify(items.slice(-30))); }
+    catch(e){ $("message").textContent="No se pudo guardar el historial en este navegador."; }
+  }
+
+  function generate(){
+    const width = Number($("width").value);
+    const original = Number($("original").value);
+    const button = Number($("buttonSize").value);
+    const device = $("device").value;
+    const fps = $("fps").value;
+    const control = $("control").value;
+
+    if(!Number.isFinite(width)||width<300||width>1000){
+      $("message").textContent="Pon un ancho actual entre 300 y 1000.";
+      return;
+    }
+    if(!Number.isFinite(original)||original<200||original>600){
+      $("message").textContent="Revisa el ancho original (200 a 600).";
+      return;
+    }
+    if(!Number.isFinite(button)||button<10||button>100){
+      $("message").textContent="El botón debe estar entre 10% y 100%.";
+      return;
+    }
+
+    /*
+      Heurística inicial, no fórmula científica.
+      El ancho se recomienda por separado de la sensibilidad.
+      Nunca cambia los ajustes del teléfono automáticamente.
+    */
+    const suggestedWidth = clamp(round(original * 1.45),300,600);
+    let general = device==="oppo" ? 176 : 170;
+    if(fps==="standard") general -= 3;
+    if(fps==="unknown") general -= 1;
+    if(control==="overshoot") general -= 7;
+    if(control==="low") general += 5;
+
+    general = clamp(general,100,200);
+    const redDot = clamp(general - 30,70,200);
+    const x2 = clamp(general - 48,50,200);
+    const x4 = clamp(general - 65,40,200);
+    const awm = clamp(general - 100,10,200);
+
+    let suggestedButton = button;
+    if(control==="overshoot") suggestedButton -= 2;
+    if(control==="low") suggestedButton += 1;
+    suggestedButton = clamp(round(suggestedButton),25,60);
+
+    current = {
+      device,width,original,button,fps,control,
+      suggestedWidth,suggestedButton,
+      general,redDot,x2,x4,awm,
+      date:new Date().toISOString()
+    };
+
+    $("outWidth").textContent=suggestedWidth;
+    $("outButton").textContent=suggestedButton+"%";
+    const values=[
+      ["General",general],
+      ["Punto rojo",redDot],
+      ["Mira 2x",x2],
+      ["Mira 4x",x4],
+      ["AWM",awm]
+    ];
+    $("sensitivities").innerHTML="";
+    values.forEach(([name,value])=>{
+      const div=document.createElement("div");
+      div.className="range";
+      const span=document.createElement("span");
+      span.textContent=name;
+      const strong=document.createElement("strong");
+      strong.textContent=value;
+      div.append(span,strong);
+      $("sensitivities").appendChild(div);
+    });
+
+    $("explanation").textContent =
+      "Empieza probando la sensibilidad sin cambiar el ancho mínimo. " +
+      "Si decides cambiar el ancho, hazlo por separado y revisa que los controles del teléfono sigan siendo cómodos. " +
+      "La recomendación de ancho es una estimación basada en el valor original que introdujiste, no un límite seguro universal.";
+
+    $("results").classList.add("show");
+    $("message").textContent="Configuración generada. Pruébala antes de hacer otro ajuste.";
+    $("learnMessage").textContent="Cuando termines la prueba, registra cómo se comportó tu mira.";
+    $("results").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  $("generate").addEventListener("click",generate);
+
+  $("copy").addEventListener("click",async function(){
+    if(!current) return;
+    const text =
+      "MV SENSITIVITY\n"+
+      "General: "+current.general+"\n"+
+      "Punto rojo: "+current.redDot+"\n"+
+      "Mira 2x: "+current.x2+"\n"+
+      "Mira 4x: "+current.x4+"\n"+
+      "AWM: "+current.awm+"\n"+
+      "Ancho sugerido: "+current.suggestedWidth+"\n"+
+      "Botón sugerido: "+current.suggestedButton+"%";
+    try{
+      await navigator.clipboard.writeText(text);
+      $("message").textContent="Configuración copiada.";
+    }catch(e){
+      const area=document.createElement("textarea");
+      area.value=text; document.body.appendChild(area);
+      area.select();
+      const ok=document.execCommand("copy");
+      area.remove();
+      $("message").textContent=ok?"Configuración copiada.":"No se pudo copiar; toma una captura de los valores.";
+    }
+  });
+
+  document.querySelectorAll("[data-feedback]").forEach(button=>{
+    button.addEventListener("click",function(){
+      if(!current){
+        $("learnMessage").textContent="Primero genera tu configuración.";
+        return;
+      }
+      const feedback=this.dataset.feedback;
+      const history=readHistory();
+      history.push({...current,feedback,recordedAt:new Date().toISOString()});
+      saveHistory(history);
+      const messages={
+        overshoot:"Próxima prueba: reduce General solo 2 puntos y deja las miras igual.",
+        low:"Próxima prueba: aumenta General solo 2 puntos y deja las miras igual.",
+        good:"¡Bien! Conserva los valores y repite varias rondas para confirmar que sea consistente.",
+        inconsistent:"Mantén los valores y repite la prueba con la misma arma, distancia y movimiento antes de cambiar algo."
+      };
+      $("learnMessage").textContent=messages[feedback]+" Se guardó el resultado en este navegador.";
+    });
+  });
+
+  $("history").addEventListener("click",function(){
+    const history=readHistory();
+    const out=$("historyOutput");
+    out.textContent="";
+    if(!history.length){
+      out.textContent="Todavía no hay pruebas guardadas.";
+      return;
+    }
+    history.slice(-8).reverse().forEach(item=>{
+      const p=document.createElement("p");
+      const date=new Date(item.recordedAt||item.date);
+      p.textContent=date.toLocaleString()+" · General "+item.general+" · "+item.feedback;
+      out.appendChild(p);
+    });
+  });
+
+  $("reset").addEventListener("click",function(){
+    if(!confirm("¿Borrar el historial de calibración de este navegador?")) return;
+    localStorage.removeItem(KEY);
+    current=null;
+    $("learnMessage").textContent="Historial borrado. Genera una nueva configuración.";
+    $("historyOutput").textContent="";
+    $("message").textContent="Calibración reiniciada.";
+  });
+})();
+</script>
+</body>
+  </html>
+  
